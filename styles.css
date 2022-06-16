@@ -15,8 +15,8 @@ body {
   justify-content: center;
   align-content: center;
   min-height: 100vh;
-  grid-template-columns: repeat(4, 100px);
-  grid-template-rows: minmax(100px, auto) repeat(5, 100px);
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: minmax(80px, auto) repeat(5, 80px);
 }
 
 .calculator-grid > button {
@@ -35,25 +35,29 @@ body {
   grid-column: span 2;
 }
 .operand{
-  background: #00AAFF;
-  color: black;
+  background: #3c6375;
+  color: #fff;
 }
 
 .operand:hover{
-  border:#00AAFF;
+  background: #6993a7 !important;
+  color: #000;
 }
 .equal{
-    background: #00FF6C;
-    color:#000;
+    background: #60d491;
+    color:#fff;
 }
 
+.equal:hover{
+  background: #74d49c !important;
+}
 .delete{
-  background: red;
+  background: #fa0c67;
   color: #fff;
 }
 
 .delete:hover{
-  background: rgb(233, 51, 51)!important;
+  background:#f1327b!important;
   color: #fff;
 }
 .output {
