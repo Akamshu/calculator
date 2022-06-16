@@ -6,54 +6,54 @@ class Calculator {
   }
 
   clear() {
-    this.currentOperand = ''
-    this.previousOperand = ''
-    this.operation = undefined
+    this.secondNumberOperator = ''
+    this.firstNumberOperator = ''
+    this.operator = undefined
   }
 
   delete() {
-    this.currentOperand = this.currentOperand.toString().slice(0, -1)
+    this.secondNumberOperator = this.secondNumberOperator.toString().slice(0, -1)
   }
 
   appendNumber(number) {
-    if (number === '.' && this.currentOperand.includes('.')) return
-    this.currentOperand = this.currentOperand.toString() + number.toString()
+    if (number === '.' && this.secondNumberOperator.includes('.')) return
+    this.secondNumberOperator = this.secondNumberOperator.toString() + number.toString()
   }
 
-  chooseOperation(operation) {
-    if (this.currentOperand === '') return
-    if (this.previousOperand !== '') {
+  chooseOperation(operator) {
+    if (this.secondNumberOperator === '') return
+    if (this.firstNumberOperator !== '') {
       this.compute()
     }
-    this.operation = operation
-    this.previousOperand = this.currentOperand
-    this.currentOperand = ''
+    this.operator = operator
+    this.firstNumberOperator = this.secondNumberOperator
+    this.secondNumberOperator = ''
   }
 
   compute() {
     let computation
-    const prev = parseFloat(this.previousOperand)
-    const current = parseFloat(this.currentOperand)
-    if (isNaN(prev) || isNaN(current)) return
-    switch (this.operation) {
+    const firstNumber = parseFloat(this.firstNumberOperator)
+    const secondNumber = parseFloat(this.secondNumberOperator)
+    if (isNaN(firstNumber) || isNaN(secondNumber)) return
+    switch (this.operator) {
       case '+':
-        computation = prev + current
+        computation = firstNumber + secondNumber
         break
       case '-':
-        computation = prev - current
+        computation = firstNumber - secondNumber
         break
       case '*':
-        computation = prev * current
+        computation = firstNumber * secondNumber
         break
       case '÷':
-        computation = prev / current
+        computation = firstNumber / secondNumber
         break
       default:
         return
     }
-    this.currentOperand = computation
-    this.operation = undefined
-    this.previousOperand = ''
+    this.secondNumberOperator = computation
+    this.operator = undefined
+    this.firstNumberOperator = ''
   }
 
   getDisplayNumber(number) {
@@ -75,10 +75,10 @@ class Calculator {
 
   updateDisplay() {
     this.currentOperandTextElement.innerText =
-      this.getDisplayNumber(this.currentOperand)
-    if (this.operation != null) {
+      this.getDisplayNumber(this.secondNumberOperator)
+    if (this.operator != null) {
       this.previousOperandTextElement.innerText =
-        `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+        `${this.getDisplayNumber(this.firstNumberOperator)} ${this.operator}`
     } else {
       this.previousOperandTextElement.innerText = ''
     }
@@ -91,8 +91,8 @@ const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
 const deleteButton = document.querySelector('[data-delete]')
 const allClearButton = document.querySelector('[data-all-clear]')
-const previousOperandTextElement = document.querySelector('[data-previous-operand]')
-const currentOperandTextElement = document.querySelector('[data-current-operand]')
+const previousOperandTextElement = document.querySelector('[data-firstNumberOperator]')
+const currentOperandTextElement = document.querySelector('[data-secondNumberOperator]')
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
 
